@@ -29,6 +29,9 @@ function createNoticeComponent(obj) {
     let article = document.createElement('article');
     article.classList.add('notice');
     article.setAttribute('data-index', obj.index);
+    article.addEventListener('dblclick', (article) => {
+        editHandler(article);
+    });
     let category = document.createElement('h3');
     category.classList.add('category');
     category.innerText = obj.category;
@@ -51,7 +54,29 @@ function updateUI(arr) {
 }
 
 
+function editHandler(article) {
+    //
+    article.preventDefault();
+    
+    console.log(article.target.parentElement.getAttribute('data-index'));
 
+    arrNotice.splice(article.target.parentElement.getAttribute('data-index'), 1, article);
+
+    if (article.target.classList[0] == "title") {
+        let editInput = document.createElement('input');
+        editInput.addEventListener('onkeyup', (event) => {
+            console.log(event.target.innerText);
+        });
+        article.target.replaceWith(editInput);
+        console.log(editInput.value);
+    } else if (article.target.classList[0] == "category") {
+        {}
+    } else {}
+
+    
+    // console.dir(article.target);
+    
+}
 
 
 let form = document.querySelector('form');
